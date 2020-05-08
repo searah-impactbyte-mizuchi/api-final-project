@@ -1,0 +1,9 @@
+{
+  "name": "backend_searah",
+  "version": "1.0.0",
+  "description": "ini backendnya",
+  "main": "app.js",
+  "repository": "git@github.com:searah-impactbyte-mizuchi/api-final-project.git",
+  "author": "erfannr <vanoer21@gmail.com>",
+  "license": "MIT"
+}
