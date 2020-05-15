@@ -1,7 +1,7 @@
 onst Sequelize = require("sequelize")
 const {db} = require("../config")
 
-const User = db.define('users', {
+const Location = db.define('users', {
     id: {
         type: Sequelize.INTEGER,
         allowNull: false,
