@@ -3,7 +3,7 @@ const { Location } = require("../../models")
 module.exports = {
     getAll: async (req,res) => {
         try {
-            const result = await User.findAll({})
+            const result = await Location.findAll({})
 
             res.status(200).json({
                 message: "Get All data location",
@@ -37,7 +37,7 @@ module.exports = {
         try {
             const {city, scenery, image1, image2} = req.body
             const {id} = req.params
-            const result = await User.update({
+            const result = await Location.update({
                 city, 
                 scenery, 
                 image1, 
@@ -46,7 +46,7 @@ module.exports = {
             {
                 where: {id:id}
             }) 
-            const getAll = await User.findAll({})
+            const getAll = await Location.findAll({})
 
             res.status(200).json({
                 message: "Update new data successfully",
