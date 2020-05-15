@@ -30,9 +30,12 @@ module.exports = {
                 message: "Create new data successfully",
                 data: result,
             })
+            res.status(401).json({
+                message: "Email must be unique",
+                data: result,
+            })
         } catch (error) {
             console.log(error);
-            
         }
     },
     update: async (req,res) => {
