@@ -1,5 +1,5 @@
 const User = require("./user")
-const Location = require("./Location")
+const Location = require("./location")
 
 module.exports = {
     User,
