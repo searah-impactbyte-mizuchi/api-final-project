@@ -40,6 +40,10 @@ const Trip = db.define('trips', {
         type: Sequelize.INTEGER,
         allowNull: false,   
     }, 
+    members: {
+        type: Sequelize.STRING,
+        allowNull: false,   
+    }, 
 })
 
 module.exports = Trip

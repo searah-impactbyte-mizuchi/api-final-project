@@ -36,7 +36,7 @@ module.exports = {
     },
     create: async (req, res) => {
         try {
-            const { location, destination, from, to, title, description, meetupPoint, user_id } = req.body
+            const { location, destination, from, to, title, description, meetupPoint, user_id, members } = req.body
             const result = await Trip.create({
                 location,
                 destination,
@@ -45,7 +45,8 @@ module.exports = {
                 title,
                 description,
                 meetupPoint,
-                user_id
+                user_id,
+                members
             })
 
             res.status(200).json({
