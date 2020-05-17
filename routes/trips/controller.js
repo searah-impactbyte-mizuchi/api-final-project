@@ -16,9 +16,27 @@ module.exports = {
 
         }
     },
+    getBYID: async (req, res) => {
+        const { id } = req.params
+        try {
+            const result = await Trip.findAll({
+                where: {
+                    id: id
+                }
+            })
+
+            res.status(200).json({
+                message: "Get trip data by ID",
+                data: result,
+            })
+        } catch (error) {
+            console.log(error);
+
+        }
+    },
     create: async (req, res) => {
         try {
-            const { location, destination, from, to, title, description, meetupPoint } = req.body
+            const { location, destination, from, to, title, description, meetupPoint, user_id } = req.body
             const result = await Trip.create({
                 location,
                 destination,
@@ -27,6 +45,7 @@ module.exports = {
                 title,
                 description,
                 meetupPoint,
+                user_id
             })
 
             res.status(200).json({

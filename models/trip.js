@@ -36,6 +36,10 @@ const Trip = db.define('trips', {
         type: Sequelize.STRING,
         allowNull: false,   
     },
+    user_id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,   
+    }, 
 })
 
 module.exports = Trip
