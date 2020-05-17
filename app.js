@@ -12,6 +12,7 @@ app.get("/",(req, res) => {
     res.status(200).json({ message: "Welcome to Searah" })
 })
 app.use("/users", require("./routes/users"))
+app.use("/trips", require("./routes/trips"))
 
 
 if (db) {
