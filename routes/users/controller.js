@@ -67,11 +67,20 @@ module.exports = {
             const { email, password } = req.body;
 
             const result = await User.findAll({ where: {email : email} });
+            if (result.length === 0) {
+                res.status(401).json({
+                    message: "Your email not registered"
+                })
+            }
+            else {
+                res.status(200).json({
+                    message: "Update new data successfully",
+                    data: result,
+                })
+            }
             // console.log(result);
-            res.status(200).json({
-                message: "Update new data successfully",
-                data: result,
-            })
+
+
             
             // const { id } = result;
 
