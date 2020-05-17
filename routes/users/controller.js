@@ -16,6 +16,22 @@ module.exports = {
             
         }
     },
+    getByID: async (req,res) => {
+        const {id} = req.params
+        try {
+            const result = await User.findAll({
+                where: { id : id}
+            })
+
+            res.status(200).json({
+                message: "Get All data users",
+                data: result,
+            })
+        } catch (error) {
+            console.log(error);
+            
+        }
+    },
     create: async (req,res) => {
         try {
             const {email, password, username, gender} = req.body

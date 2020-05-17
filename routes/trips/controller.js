@@ -1,4 +1,4 @@
-const { Trip } = require("../../models")
+const { User, Trip } = require("../../models")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
 
@@ -22,13 +22,34 @@ module.exports = {
             const result = await Trip.findAll({
                 where: {
                     id: id
-                }
+                }, 
+                raw: true
             })
 
+            const members = result[0].members.split(",")
+            // console.log(members);
+            const memberResult = await members.map(async item  => {
+                const result = await User.findAll({
+                    where: {
+                        id : item,
+                    },
+                    raw : true
+                })
+                console.log(result);
+                
+                return result
+            })
+
+            console.log(memberResult);
+            
+
+            
             res.status(200).json({
                 message: "Get trip data by ID",
                 data: result,
             })
+            console.log(result);
+            
         } catch (error) {
             console.log(error);
 
