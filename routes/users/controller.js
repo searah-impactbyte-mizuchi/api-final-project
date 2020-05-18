@@ -34,12 +34,13 @@ module.exports = {
     },
     create: async (req,res) => {
         try {
-            const {email, password, username, gender} = req.body
+            const {email, password, username, gender, avatar} = req.body
             const result = await User.create({
                 email, 
                 password, 
                 username, 
-                gender
+                gender, 
+                avatar
             }) 
 
             res.status(200).json({
@@ -56,13 +57,14 @@ module.exports = {
     },
     update: async (req,res) => {
         try {
-            const {email, password, username, gender} = req.body
+            const {email, password, username, gender, avatar} = req.body
             const {id} = req.params
             const result = await User.update({
                 email, 
                 password, 
                 username, 
-                gender
+                gender,
+                avatar
             },
             {
                 where: {id:id}

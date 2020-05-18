@@ -30,7 +30,7 @@ module.exports = {
             const members = await User.findAll({
                 raw: true,
             });
-
+            
             const array = [];
             members.map((item) => {
                 membersID.map((id) => {
