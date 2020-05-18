@@ -119,12 +119,29 @@ module.exports = {
             })
 
             res.status(200).json({
-                message: `Movie with id : ${id} is successfully deleted`, data: result
+                message: `Trip with id : ${id} is successfully deleted`, 
+                data: result
             })
         } catch (error) {
             console.log(error);
         }
     },
+    filterByDestination: async (req, res) => {
+        try {
+            const { destination } = req.params
+
+            const result = await Trip.findAll({
+                where : {destination: destination}
+            })
+            res.status(200).json({
+                // message: `Trip with id : ${id} is successfully deleted`, 
+                data: result
+            })
+            
+        } catch (error) {
+            console.log(error);
+        }
+    }
     // login: async (req, res) => {
     //     try {
     //         const { email, password } = req.body;
