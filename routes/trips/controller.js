@@ -17,39 +17,35 @@ module.exports = {
         }
     },
     getBYID: async (req, res) => {
-        const { id } = req.params
+        const { id } = req.params;
         try {
             const result = await Trip.findAll({
                 where: {
-                    id: id
-                }, 
-                raw: true
-            })
+                    id: id,
+                },
+                raw: true,
+            });
 
-            const members = result[0].members.split(",")
-            // console.log(members);
-            const memberResult = await members.map(async item  => {
-                const result = await User.findAll({
-                    where: {
-                        id : item,
-                    },
-                    raw : true
-                })
-                console.log(result);
-                
-                return result
-            })
+            const membersID = result[0].members.split(",");
+            const members = await User.findAll({
+                raw: true,
+            });
 
-            console.log(memberResult);
-            
+            const array = [];
+            members.map((item) => {
+                membersID.map((id) => {
+                    if (item.id == id) {
+                        array.push(item);
+                    }
+                });
+            });
 
-            
+            result[0].members = array;
+
             res.status(200).json({
                 message: "Get trip data by ID",
                 data: result,
             })
-            console.log(result);
-            
         } catch (error) {
             console.log(error);
 
@@ -96,8 +92,8 @@ module.exports = {
                 meetupPoint,
             },
                 {
-                    where: { 
-                        id: id 
+                    where: {
+                        id: id
                     }
                 })
             const getAll = await Trip.findAll({})
