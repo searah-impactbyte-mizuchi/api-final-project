@@ -86,7 +86,10 @@ module.exports = {
         try {
             const { email, password } = req.body;
 
-            const result = await User.findAll({ where: {email : email} });
+            const result = await User.findAll({ where: {
+                email : email,
+                password : password
+            } });
             if (result.length === 0) {
                 res.status(401).json({
                     message: "Your email not registered"
