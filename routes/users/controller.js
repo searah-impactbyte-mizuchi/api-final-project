@@ -69,7 +69,9 @@ module.exports = {
             {
                 where: {id:id}
             }) 
-            const getAll = await User.findAll({})
+            const getAll = await User.findAll({
+                where : {id : id}
+            })
 
             res.status(200).json({
                 message: "Update new data successfully",
