@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
 
 module.exports = {
-    getAll: async (req,res) => {
+    getAll: async (req, res) => {
         try {
             const result = await User.findAll({})
 
@@ -13,14 +13,14 @@ module.exports = {
             })
         } catch (error) {
             console.log(error);
-            
+
         }
     },
-    getByID: async (req,res) => {
-        const {id} = req.params
+    getByID: async (req, res) => {
+        const { id } = req.params
         try {
             const result = await User.findAll({
-                where: { id : id}
+                where: { id: id }
             })
 
             res.status(200).json({
@@ -29,18 +29,19 @@ module.exports = {
             })
         } catch (error) {
             console.log(error);
-            
+
         }
     },
-    create: async (req,res) => {
+    create: async (req, res) => {
         try {
-            const {email, password, username, gender} = req.body
+            const { email, password, username, gender, avatar } = req.body
             const result = await User.create({
-                email, 
-                password, 
-                username, 
-                gender
-            }) 
+                email,
+                password,
+                username,
+                gender,
+                avatar
+            })
 
             res.status(200).json({
                 message: "Create new data successfully",
@@ -54,20 +55,23 @@ module.exports = {
             console.log(error);
         }
     },
-    update: async (req,res) => {
+    update: async (req, res) => {
         try {
-            const {email, password, username, gender} = req.body
-            const {id} = req.params
+            const { email, password, username, gender, avatar } = req.body
+            const { id } = req.params
             const result = await User.update({
-                email, 
-                password, 
-                username, 
-                gender
+                email,
+                password,
+                username,
+                gender,
+                avatar
             },
-            {
-                where: {id:id}
-            }) 
-            const getAll = await User.findAll({})
+                {
+                    where: { id: id }
+                })
+            const getAll = await User.findAll({
+                where: { id: id }
+            })
 
             res.status(200).json({
                 message: "Update new data successfully",
@@ -75,16 +79,23 @@ module.exports = {
             })
         } catch (error) {
             console.log(error);
-            
+
         }
     },
     login: async (req, res) => {
         try {
             const { email, password } = req.body;
 
-            const result = await User.findAll({ where: {email : email} });
+            const result = await User.findAll({
+                where: {
+                    email: email,
+                    password: password
+                }
+            });
+            console.log(result.length);
+            
             if (result.length === 0) {
-                res.status(401).json({
+                res.status(401).send({
                     message: "Your email not registered"
                 })
             }
@@ -97,7 +108,7 @@ module.exports = {
             // console.log(result);
 
 
-            
+
             // const { id } = result;
 
             // bcrypt.compare(password, result.password).then((response) => {
@@ -114,6 +125,9 @@ module.exports = {
             //     }
             // });
         } catch (error) {
+            res.status(401).send({
+                message: "Your password not match",
+            });
             console.log(error);
         }
     }
