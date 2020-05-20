@@ -151,6 +151,47 @@ module.exports = {
             console.log(error);
         }
     },
+    addMember: async (req, res) => {
+        try {
+            const { id } = req.params
+            const { member } = req.body
+
+            console.log(member);
+
+            const result = await Trip.findAll({
+                where: {
+                    id: id
+                },
+                raw: true,
+            })
+
+            // const members = result[0].members
+            const members = result[0].members.split(",");
+            members.push(member)
+            // console.log(members.toString());
+
+
+            const update = await Trip.update({
+                // updatedAt: null,
+                members: members.toString()
+            }, {
+                where: {
+                    id: id
+                }
+            });
+
+
+            res.status(200).json({
+                message: "Add new member successfully",
+                data: update,
+            })
+            
+
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
     // login: async (req, res) => {
     //     try {
     //         const { email, password } = req.body;
