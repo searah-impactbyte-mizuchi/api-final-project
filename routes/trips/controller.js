@@ -18,7 +18,11 @@ module.exports = {
     getBYID: async (req, res) => {
         const { id } = req.params;
         try {
+            Trip.belongsTo(User, { foreignKey: "user_id" });
+            User.hasOne(Trip, { foreignKey: "id" });
+
             const result = await Trip.findAll({
+                include: [{ model: User }],
                 where: {
                     id: id,
                 },
@@ -29,7 +33,7 @@ module.exports = {
             const members = await User.findAll({
                 raw: true,
             });
-            
+
             const array = [];
             members.map((item) => {
                 membersID.map((id) => {
@@ -44,7 +48,7 @@ module.exports = {
             res.status(200).json({
                 message: "Get trip data by ID",
                 data: result,
-            })
+            });
         } catch (error) {
             console.log(error);
         }
@@ -98,13 +102,12 @@ module.exports = {
                 meetupPoint,
             } = req.body;
             const { id } = req.params;
-            const result = await Trip.update(
-                {
-                    where: {
-                        id: id
-                    }
-                })
-            const getAll = await Trip.findAll({})
+            const result = await Trip.update({
+                where: {
+                    id: id,
+                },
+            });
+            const getAll = await Trip.findAll({});
 
             res.status(200).json({
                 message: "Update new data successfully",
@@ -126,29 +129,28 @@ module.exports = {
             });
 
             res.status(200).json({
-                message: `Trip with id : ${id} is successfully deleted`, 
-                data: result
-            })
+                message: `Trip with id : ${id} is successfully deleted`,
+                data: result,
+            });
         } catch (error) {
             console.log(error);
         }
     },
     filterByDestination: async (req, res) => {
         try {
-            const { destination } = req.params
+            const { destination } = req.params;
 
             const result = await Trip.findAll({
-                where : {destination: destination}
-            })
+                where: { destination: destination },
+            });
             res.status(200).json({
-                // message: `Trip with id : ${id} is successfully deleted`, 
-                data: result
-            })
-            
+                // message: `Trip with id : ${id} is successfully deleted`,
+                data: result,
+            });
         } catch (error) {
             console.log(error);
         }
-    }
+    },
     // login: async (req, res) => {
     //     try {
     //         const { email, password } = req.body;
