@@ -37,13 +37,16 @@ module.exports = {
         const result = await User.findOne({email : email });
         if (result) return res.status(401).send("Your email has already registered");
         try {
-            const { email, password, username, gender, avatar } = req.body
+            const { email, password, username, gender, avatar, city, about, age } = req.body
             const result = await User.create({
                 email,
                 password,
                 username,
                 gender,
-                avatar
+                avatar,
+                city,
+                about,
+                age
             })
 
             res.status(200).json({
@@ -60,14 +63,17 @@ module.exports = {
     },
     update: async (req, res) => {
         try {
-            const { email, password, username, gender, avatar } = req.body
+            const { email, password, username, gender, avatar, city, about, age } = req.body
             const { id } = req.params
             const result = await User.update({
                 email,
                 password,
                 username,
                 gender,
-                avatar
+                avatar,
+                city,
+                about,
+                age
             },
                 {
                     where: { id: id }

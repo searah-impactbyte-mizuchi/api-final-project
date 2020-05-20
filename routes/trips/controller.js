@@ -1,19 +1,18 @@
-const { User, Trip } = require("../../models")
-const jwt = require("jsonwebtoken")
-const bcrypt = require("bcrypt")
+const { User, Trip } = require("../../models");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 
 module.exports = {
     getAll: async (req, res) => {
         try {
-            const result = await Trip.findAll({})
+            const result = await Trip.findAll({});
 
             res.status(200).json({
                 message: "Get all trip data for users",
                 data: result,
-            })
+            });
         } catch (error) {
             console.log(error);
-
         }
     },
     getBYID: async (req, res) => {
@@ -48,12 +47,21 @@ module.exports = {
             })
         } catch (error) {
             console.log(error);
-
         }
     },
     create: async (req, res) => {
         try {
-            const { location, destination, from, to, title, description, meetupPoint, user_id, members } = req.body
+            const {
+                location,
+                destination,
+                from,
+                to,
+                title,
+                description,
+                meetupPoint,
+                user_id,
+                members,
+            } = req.body;
             const result = await Trip.create({
                 location,
                 destination,
@@ -63,26 +71,24 @@ module.exports = {
                 description,
                 meetupPoint,
                 user_id,
-                members
-            })
+                members,
+            });
 
             res.status(200).json({
                 message: "Create new data successfully",
                 data: result,
-            })
+            });
             res.status(401).json({
                 message: "Email must be unique",
                 data: result,
-            })
+            });
         } catch (error) {
             console.log(error);
         }
     },
     update: async (req, res) => {
         try {
-            const { location, destination, from, to, title, description, meetupPoint } = req.body
-            const { id } = req.params
-            const result = await Trip.update({
+            const {
                 location,
                 destination,
                 from,
@@ -90,7 +96,9 @@ module.exports = {
                 title,
                 description,
                 meetupPoint,
-            },
+            } = req.body;
+            const { id } = req.params;
+            const result = await Trip.update(
                 {
                     where: {
                         id: id
@@ -101,22 +109,21 @@ module.exports = {
             res.status(200).json({
                 message: "Update new data successfully",
                 data: getAll,
-            })
+            });
         } catch (error) {
             console.log(error);
-
         }
     },
     deleteByID: async (req, res) => {
         try {
-            const { id } = req.params
+            const { id } = req.params;
             // console.log(id);
 
             const result = await Trip.destroy({
                 where: {
-                    id: id
-                }
-            })
+                    id: id,
+                },
+            });
 
             res.status(200).json({
                 message: `Trip with id : ${id} is successfully deleted`, 
@@ -172,4 +179,4 @@ module.exports = {
     //         console.log(error);
     //     }
     // }
-}
+};

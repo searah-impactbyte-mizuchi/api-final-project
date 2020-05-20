@@ -12,11 +12,7 @@ app.get("/",(req, res) => {
     res.status(200).json({ message: "Welcome to Searah" })
 })
 app.use("/users", require("./routes/users"))
-<<<<<<< HEAD
 app.use("/trips", require("./routes/trips"))
-=======
-app.use("/location", require("./routes/location"))
->>>>>>> dcc52dbba3950f5476975cc4a7b7dbae00cdef65
 
 
 if (db) {
