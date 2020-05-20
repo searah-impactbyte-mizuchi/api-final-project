@@ -28,10 +28,24 @@ const User = db.define('users', {
     },
     avatar: {
         type: Sequelize.STRING,
+        allowNull: false, 
     },
     status: {
-        type: Sequelize.STRING,   
+        type: Sequelize.STRING,
+        allowNull: false,    
     },
+    city: {
+        type: Sequelize.STRING,
+        allowNull: false, 
+    },
+    about: {
+        type: Sequelize.STRING,
+        allowNull: false, 
+    },
+    age: {
+        type: Sequelize.STRING,
+        allowNull: false, 
+    }
 })
 
 module.exports = User
