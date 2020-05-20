@@ -10,39 +10,39 @@ const Trip = db.define('trips', {
     },
     location: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
     },
     destination: {
         type: Sequelize.STRING,
-        allowNull: false,   
+        allowNull: true,   
     },
     from: {
         type: Sequelize.STRING,
-        allowNull: false,   
+        allowNull: true,   
     },
     to: {
         type: Sequelize.STRING,
-        allowNull: false,   
+        allowNull: true,   
     },
     title: {
         type: Sequelize.STRING,
-        allowNull: false,
+        allowNull: true,
     },
     description: {
         type: Sequelize.STRING, 
-        allowNull: false,  
+        allowNull: true,  
     },
     meetupPoint: {
         type: Sequelize.STRING,
-        allowNull: false,   
+        allowNull: true,   
     },
     user_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,   
+        allowNull: true,   
     }, 
     members: {
         type: Sequelize.STRING,
-        allowNull: false,   
+        allowNull: true,   
     }, 
 })
 
