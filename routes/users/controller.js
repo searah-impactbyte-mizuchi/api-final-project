@@ -32,7 +32,10 @@ module.exports = {
 
         }
     },
-    create: async (req, res) => {
+    create: async (req,res) => {
+        
+        const result = await User.findOne({email : email });
+        if (result) return res.status(401).send("Your email has already registered");
         try {
             const { email, password, username, gender, avatar, city, about, age } = req.body
             const result = await User.create({
