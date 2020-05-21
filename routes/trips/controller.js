@@ -147,9 +147,18 @@ module.exports = {
         try {
             const { destination } = req.params;
 
+            Trip.belongsTo(User, { foreignKey: "user_id" });
+            User.hasOne(Trip, { foreignKey: "id" });
+
             const result = await Trip.findAll({
+                include : [{ model: User }],
                 where: { destination: destination },
+
             });
+
+            // const result = await Trip.findAll({
+            //     where: { destination: destination },
+            // });
             res.status(200).json({
                 // message: `Trip with id : ${id} is successfully deleted`,
                 data: result,
