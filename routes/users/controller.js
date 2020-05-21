@@ -37,7 +37,7 @@ module.exports = {
         const result = await User.findOne({email : email });
         if (result) return res.status(401).send("Your email has already registered");
         try {
-            const { email, password, username, gender, avatar, city, about, age } = req.body
+            const { email, password, username, gender, avatar, city, about, age, trips_created, } = req.body
             const result = await User.create({
                 email,
                 password,
@@ -46,7 +46,8 @@ module.exports = {
                 avatar,
                 city,
                 about,
-                age
+                age,
+                trips_created,
             })
 
             res.status(200).json({
@@ -73,7 +74,7 @@ module.exports = {
                 avatar,
                 city,
                 about,
-                age
+                age,
             },
                 {
                     where: { id: id }
