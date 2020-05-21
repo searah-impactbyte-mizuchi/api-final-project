@@ -75,6 +75,7 @@ module.exports = {
                 city,
                 about,
                 age,
+                trips_created,
             },
                 {
                     where: { id: id }
