@@ -72,6 +72,7 @@ module.exports = {
                 meetupPoint,
                 user_id,
                 members,
+                trips_created,
             } = req.body;
             const result = await Trip.create({
                 location,
@@ -83,6 +84,7 @@ module.exports = {
                 meetupPoint,
                 user_id,
                 members,
+                trips_created,
             });
 
             res.status(200).json({
