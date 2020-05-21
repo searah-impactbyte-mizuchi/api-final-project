@@ -5,35 +5,11 @@ const bcrypt = require("bcrypt");
 module.exports = {
     getAll: async (req, res) => {
         try {
-            Trip.belongsTo(User, { foreignKey: "user_id" });
-            User.hasOne(Trip, { foreignKey: "id" });
-
-            const result = await Trip.findAll({
-                include: [{ model: User }],
-                where: {
-                    id: id,
-                },
-                raw: true,
-            });
-
-            const membersID = result[0].members.split(",");
-            const members = await User.findAll({
-                raw: true,
-            });
-
-            const array = [];
-            members.map((item) => {
-                membersID.map((id) => {
-                    if (item.id == id) {
-                        array.push(item);
-                    }
-                });
-            });
-
-            result[0].members = array;
+            
+            const result = await Trip.findAll({});
 
             res.status(200).json({
-                message: "Get trip data by ID",
+                message: "Get all trip data for users",
                 data: result,
             });
         } catch (error) {
