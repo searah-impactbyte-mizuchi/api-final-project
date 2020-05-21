@@ -1,4 +1,4 @@
-const { User } = require("../../models")
+const { User, Trip } = require("../../models")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
 
@@ -20,7 +20,7 @@ module.exports = {
         const { id } = req.params
         try {
             User.belongsTo(trips_created, { foreignKey: "id" });
-            Tri.hasOne(User, { foreignKey: "id" });
+            Trip.hasOne(User, { foreignKey: "id" });
 
             const result = await Trip.findAll({
                 include: [{ model: trips_created }],
