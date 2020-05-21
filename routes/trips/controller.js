@@ -6,7 +6,15 @@ module.exports = {
     getAll: async (req, res) => {
         try {
             
-            const result = await Trip.findAll({});
+            const result = await Trip.findAll({
+                include: [{ model: User }],
+                where: {
+                    id: id,
+                },
+                raw: true,
+            });
+
+            });
 
             res.status(200).json({
                 message: "Get all trip data for users",
