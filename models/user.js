@@ -43,6 +43,10 @@ const User = db.define('users', {
         allowNull: false, 
     },
     age: {
+        type: Sequelize.INTEGER,
+        allowNull: false, 
+    },
+    trips_created: {
         type: Sequelize.STRING,
         allowNull: false, 
     }
