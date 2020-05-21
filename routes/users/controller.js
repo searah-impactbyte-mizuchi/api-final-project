@@ -19,10 +19,11 @@ module.exports = {
     getByID: async (req, res) => {
         const { id } = req.params
         try {
+            
             User.belongsTo(Trip, { foreignKey: "id" });
             Trip.hasOne(User, { foreignKey: "id" });
 
-            const result = await Trip.findAll({
+            const result = await User.findAll({
                 include: [{ model: Trip }],
                 where: {
                     id: id,
@@ -31,7 +32,7 @@ module.exports = {
             });
 
             const trips_createdID = result[0].trips_created.split(",");
-            const trips_created = await User.findAll({
+            const trips_created = await Trip.findAll({
                 raw: true,
             });
 
@@ -72,7 +73,7 @@ module.exports = {
                 trips_created,
             })
 
-            res.status(200).json({
+            res.status(200).send({
                 message: "Create new data successfully",
                 data: result,
             })
