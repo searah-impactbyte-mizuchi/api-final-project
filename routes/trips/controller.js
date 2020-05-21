@@ -5,17 +5,7 @@ const bcrypt = require("bcrypt");
 module.exports = {
     getAll: async (req, res) => {
         try {
-            Trip.belongsTo(User, { foreignKey: "user_id" });
-            User.hasOne(Trip, { foreignKey: "id" });
-            const result = await Trip.findAll({
-                include: [{ model: User }],
-                where: {
-                    id: id,
-                },
-                raw: true,
-            });
-
-            });
+            const result = await Trip.findAll({});
 
             res.status(200).json({
                 message: "Get all trip data for users",
