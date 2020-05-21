@@ -19,24 +19,39 @@ module.exports = {
     getByID: async (req, res) => {
         const { id } = req.params
         try {
-            User.belongsTo(trips_created, { foreignKey: "id" });
+            User.belongsTo(Trip, { foreignKey: "id" });
             Trip.hasOne(User, { foreignKey: "id" });
 
             const result = await Trip.findAll({
-                include: [{ model: trips_created }],
+                include: [{ model: Trip }],
                 where: {
                     id: id,
                 },
                 raw: true,
             });
 
+            const trips_createdID = result[0].trips_created.split(",");
+            const trips_created = await User.findAll({
+                raw: true,
+            });
+
+            const array = [];
+            trips_created.map((item) => {
+                trips_createdID.map((id) => {
+                    if (item.id == id) {
+                        array.push(item);
+                    }
+                });
+            });
+
+            result[0].trips_created = array;
+
             res.status(200).json({
-                message: "Get All data users",
+                message: "Get trip data by ID",
                 data: result,
-            })
+            });
         } catch (error) {
             console.log(error);
-
         }
     },
     create: async (req,res) => {
