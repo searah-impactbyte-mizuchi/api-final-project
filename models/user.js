@@ -43,7 +43,7 @@ const User = db.define('users', {
         allowNull: false, 
     },
     age: {
-        type: Sequelize,INTEGER,
+        type: Sequelize.INTEGER,
         allowNull: false, 
     },
     trips_created: {
