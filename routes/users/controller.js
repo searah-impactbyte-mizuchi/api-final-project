@@ -19,9 +19,16 @@ module.exports = {
     getByID: async (req, res) => {
         const { id } = req.params
         try {
-            const result = await User.findAll({
-                where: { id: id }
-            })
+            User.belongsTo(trips_created, { foreignKey: "id" });
+            Tri.hasOne(User, { foreignKey: "id" });
+
+            const result = await Trip.findAll({
+                include: [{ model: trips_created }],
+                where: {
+                    id: id,
+                },
+                raw: true,
+            });
 
             res.status(200).json({
                 message: "Get All data users",
