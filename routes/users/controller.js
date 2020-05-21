@@ -64,7 +64,7 @@ module.exports = {
     },
     update: async (req, res) => {
         try {
-            const { email, password, username, gender, avatar, city, about, age } = req.body
+            const { email, password, username, gender, avatar, city, about, age, trips_created } = req.body
             const { id } = req.params
             const result = await User.update({
                 email,
