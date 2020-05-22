@@ -28,27 +28,27 @@ const User = db.define('users', {
     },
     avatar: {
         type: Sequelize.STRING,
-        allowNull: false, 
+        allowNull: true, 
     },
     status: {
         type: Sequelize.STRING,
-        allowNull: false,    
+        allowNull: true,    
     },
     city: {
         type: Sequelize.STRING,
-        allowNull: false, 
+        allowNull: true, 
     },
     about: {
         type: Sequelize.STRING,
-        allowNull: false, 
+        allowNull: true, 
     },
     age: {
         type: Sequelize.INTEGER,
-        allowNull: false, 
+        allowNull: true, 
     },
     trips_created: {
         type: Sequelize.STRING,
-        allowNull: false, 
+        allowNull: true, 
     }
 })
 
