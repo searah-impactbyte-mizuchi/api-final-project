@@ -99,7 +99,7 @@ module.exports = {
             const result = await User.findAll({
                 where: {
                     email: email,
-                    password: password
+                    // password: password
                 }
             });
             console.log(result.length);
@@ -107,6 +107,11 @@ module.exports = {
             if (result.length === 0) {
                 res.status(403).send({
                     message: "Your email not registered"
+                })
+            }
+            else if (password != result[0].password){
+                res.status(403).send({
+                    message: "Your password is wrong"
                 })
             }
             else {
