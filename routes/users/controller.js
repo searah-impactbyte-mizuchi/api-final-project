@@ -105,7 +105,7 @@ module.exports = {
             console.log(result.length);
             
             if (result.length === 0) {
-                res.status(401).send({
+                res.status(200).send({
                     message: "Your email not registered"
                 })
             }
