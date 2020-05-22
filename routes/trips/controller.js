@@ -22,6 +22,25 @@ module.exports = {
             console.log(error);
         }
     },
+    getByUserID: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const result = await Trip.findAll({
+                where: {
+                    user_id: id,
+                },
+                raw: true,
+            });
+
+            res.status(200).json({
+                message: "Get all trip data for users",
+                data: result,
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    },
+
     getBYID: async (req, res) => {
         const { id } = req.params;
         try {
