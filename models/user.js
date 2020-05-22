@@ -28,7 +28,7 @@ const User = db.define('users', {
     },
     avatar: {
         type: Sequelize.STRING,
-        allowNull: true, 
+        allowNull: false, 
     },
     status: {
         type: Sequelize.STRING,
