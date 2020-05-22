@@ -19,16 +19,9 @@ module.exports = {
     getByID: async (req, res) => {
         const { id } = req.params
         try {
-            User.belongsTo(trips_created, { foreignKey: "id" });
-            // User.hasOne(Trip, { foreignKey: "id" });
-         
-            const result = await Trip.findAll({
-                include: [{ model: trips_created }],
-                where: {
-                    id: id,
-                },
-                raw: true,
-            });
+            const result = await User.findAll({
+                where: { id: id }
+            })
 
             res.status(200).json({
                 message: "Get All data users",
@@ -44,7 +37,7 @@ module.exports = {
         // const result = await User.findOne({email : email });
         // if (result) return res.status(401).send("Your email has already registered");
         try {
-            const { email, password, username, gender, avatar, city, about, age, trips_created, } = req.body
+            const { email, password, username, gender, avatar, city, about, age} = req.body
             const result = await User.create({
                 email,
                 password,
@@ -54,7 +47,6 @@ module.exports = {
                 city,
                 about,
                 age,
-                trips_created,
             })
 
             res.status(200).json({

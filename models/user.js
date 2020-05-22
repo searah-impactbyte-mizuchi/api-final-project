@@ -46,10 +46,6 @@ const User = db.define('users', {
         type: Sequelize.INTEGER,
         allowNull: true, 
     },
-    trips_created: {
-        type: Sequelize.STRING,
-        allowNull: true, 
-    }
 })
 
 module.exports = User
