@@ -29,6 +29,7 @@ const User = db.define('users', {
     avatar: {
         type: Sequelize.STRING,
         allowNull: true, 
+        defaultValue : "https://www.kindpng.com/picc/m/24-248253_user-profile-default-image-png-clipart-png-download.png"
     },
     status: {
         type: Sequelize.STRING,
